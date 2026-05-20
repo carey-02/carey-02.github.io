@@ -39,22 +39,31 @@ body.scrollable{overflow:auto}
 /* ════════════════════════════
    LANDING
 ════════════════════════════ */
-#landing{background:var(--ink);display:flex;flex-direction:column;overflow:hidden}
+#landing{background:#FFFFFF;display:flex;flex-direction:column;overflow:hidden}
 
+/* TOP BAR — centered like purple.fr, evenly spaced, no lines */
 .land-top{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  border-bottom:1px solid rgba(255,255,255,.08);
-  padding:0;flex-shrink:0;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  gap:0;
+  padding:1.1rem 0;
+  flex-shrink:0;
+  width:100%;
 }
 .land-cell{
-  padding:.9rem 1.25rem;
-  border-right:1px solid rgba(255,255,255,.08);
-  font-family:var(--mono);font-size:.58rem;
-  letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(255,255,255,.3);line-height:1.7;
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight:700;
+  font-size:.78rem;
+  letter-spacing:.01em;
+  color:#0C0A08;
+  line-height:1.45;
+  text-align:center;
+  padding:0 3.5rem;
+  flex:1;
+  max-width:320px;
 }
-.land-cell:last-child{border-right:none}
-.land-cell strong{display:block;color:rgba(255,255,255,.55);font-weight:400}
+.land-cell strong{display:block;color:#0C0A08;font-weight:700;font-size:.78rem}
 #liveclock{font-variant-numeric:tabular-nums}
 
 /* BIG LOGO AREA */
@@ -62,45 +71,165 @@ body.scrollable{overflow:auto}
   flex:1;position:relative;
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
+  background:#FFFFFF;
 }
 
-/* Orchid blobs */
-.blob{
-  position:absolute;border-radius:50%;
-  filter:blur(70px);pointer-events:none;
-  mix-blend-mode:screen;
+/* CAREY — massive, centered, bleeds off both sides like OLMA */
+.land-carey{
+  position:relative;z-index:1;
+  font-family:'Arial Black','Arial Bold',Arial,sans-serif;
+  font-weight:900;
+  font-size:clamp(12rem,38vw,38rem);
+  letter-spacing:-0.01em;
+  line-height:1;
+  color:#0C0A08;
+  animation:logofade 1.2s ease forwards;
+  user-select:none;
+  white-space:nowrap;
+  /* center it so edges bleed off screen */
+  margin:0 auto;
 }
-.b1{width:55vw;height:55vw;background:radial-gradient(circle,rgba(168,23,74,.55) 0%,transparent 70%);top:-10%;left:-15%}
-.b2{width:45vw;height:45vw;background:radial-gradient(circle,rgba(74,16,53,.6) 0%,transparent 70%);top:10%;right:-10%}
-.b3{width:35vw;height:35vw;background:radial-gradient(circle,rgba(192,168,204,.35) 0%,transparent 70%);bottom:5%;left:30%}
-.b4{width:25vw;height:25vw;background:radial-gradient(circle,rgba(90,106,24,.4) 0%,transparent 70%);bottom:15%;right:5%}
-.b5{width:20vw;height:20vw;background:radial-gradient(circle,rgba(216,152,112,.3) 0%,transparent 70%);top:20%;left:40%}
+@keyframes logofade{from{opacity:0}to{opacity:1}}
 
-.land-logo{
-  position:relative;z-index:2;
-  width:min(680px,85vw);
-  filter:invert(1);
-  opacity:.93;
-  animation:logofade 1.8s ease forwards;
+/* ── BLOB SYSTEM ──
+   Thin, irregular, rising from bottom, in front of CAREY (z-index:2)
+   Each has a unique organic shape via clip-path + border-radius combo
+*/
+.blob-wrap{
+  position:absolute;
+  pointer-events:none;
+  z-index:2;
+  bottom:0;
 }
-@keyframes logofade{from{opacity:0;transform:scale(.97)}to{opacity:.93;transform:scale(1)}}
+
+/* ── LEFT blob: Brown + yellow spots rising from bottom-left ── */
+.blob-wrap.bw1{
+  left:-3%;
+  width:28vw;
+  height:88vh;
+  /* narrow, leans left, irregular */
+  clip-path:polygon(8% 100%, 0% 60%, 5% 35%, 15% 15%, 28% 8%, 45% 12%, 58% 5%, 68% 18%, 72% 35%, 65% 55%, 70% 72%, 60% 88%, 50% 100%);
+}
+.blob-wrap.bw1 .bcore{
+  position:absolute;
+  inset:-15%;
+  background:
+    /* yellow orchid spots — clustered bottom, scattered up */
+    radial-gradient(ellipse 9% 6% at 38% 75%, rgba(255,215,0,1) 0%, rgba(235,190,0,0.7) 45%, transparent 80%),
+    radial-gradient(ellipse 7% 5% at 55% 82%, rgba(245,205,0,0.95) 0%, transparent 70%),
+    radial-gradient(ellipse 6% 4% at 25% 68%, rgba(255,220,5,0.9) 0%, transparent 70%),
+    radial-gradient(ellipse 5% 3% at 62% 60%, rgba(240,195,0,0.85) 0%, transparent 70%),
+    radial-gradient(ellipse 4% 3% at 42% 55%, rgba(250,210,0,0.8) 0%, transparent 70%),
+    radial-gradient(ellipse 3% 2% at 30% 45%, rgba(235,185,0,0.7) 0%, transparent 70%),
+    radial-gradient(ellipse 4% 3% at 58% 48%, rgba(245,200,0,0.65) 0%, transparent 70%),
+    radial-gradient(ellipse 3% 2% at 20% 38%, rgba(230,180,0,0.6) 0%, transparent 70%),
+    /* brown body — dense at very bottom, thins toward top */
+    radial-gradient(ellipse 90% 100% at 45% 95%, rgba(75,40,10,1) 0%, rgba(105,60,18,0.92) 18%, rgba(140,85,30,0.78) 35%, rgba(175,115,50,0.55) 52%, rgba(210,155,80,0.28) 68%, transparent 82%);
+  filter:blur(20px);
+}
+
+/* ── CENTRE blob: Hot magenta + blue sides ── */
+.blob-wrap.bw2{
+  left:50%;
+  transform:translateX(-50%);
+  width:26vw;
+  height:95vh;
+  /* taller, narrower, wavy top */
+  clip-path:polygon(15% 100%, 5% 70%, 0% 45%, 8% 22%, 20% 8%, 35% 2%, 50% 5%, 65% 0%, 78% 8%, 88% 22%, 95% 42%, 92% 65%, 85% 85%, 75% 100%);
+}
+.blob-wrap.bw2 .bcore{
+  position:absolute;
+  inset:-15%;
+  background:
+    /* baby blue on LEFT side of blob */
+    radial-gradient(ellipse 18% 60% at 8% 50%, rgba(80,155,255,0.88) 0%, rgba(60,130,240,0.55) 50%, transparent 80%),
+    radial-gradient(ellipse 12% 40% at 12% 70%, rgba(90,165,255,0.8) 0%, transparent 70%),
+    radial-gradient(ellipse 10% 30% at 5% 35%, rgba(70,145,248,0.75) 0%, transparent 65%),
+    /* baby blue on RIGHT side of blob */
+    radial-gradient(ellipse 18% 60% at 92% 50%, rgba(80,155,255,0.88) 0%, rgba(60,130,240,0.55) 50%, transparent 80%),
+    radial-gradient(ellipse 12% 40% at 88% 72%, rgba(90,165,255,0.8) 0%, transparent 70%),
+    radial-gradient(ellipse 10% 30% at 95% 35%, rgba(70,145,248,0.75) 0%, transparent 65%),
+    /* some blue spot clusters mid */
+    radial-gradient(ellipse 5% 3% at 28% 55%, rgba(100,170,255,0.7) 0%, transparent 70%),
+    radial-gradient(ellipse 4% 3% at 72% 48%, rgba(85,158,252,0.65) 0%, transparent 70%),
+    radial-gradient(ellipse 4% 3% at 35% 40%, rgba(95,162,255,0.6) 0%, transparent 70%),
+    /* hot magenta centre — fluorescent core */
+    radial-gradient(ellipse 60% 100% at 50% 92%, rgba(255,0,95,1) 0%, rgba(255,15,108,0.94) 15%, rgba(255,55,140,0.82) 30%, rgba(255,110,172,0.6) 48%, rgba(255,170,205,0.3) 62%, transparent 78%);
+  filter:blur(18px);
+}
+
+/* ── RIGHT blob: Baby pink + green spots in middle ── */
+.blob-wrap.bw3{
+  right:-3%;
+  width:27vw;
+  height:84vh;
+  /* different organic shape — wider base, pinched mid, flares top-right */
+  clip-path:polygon(30% 100%, 8% 78%, 0% 55%, 5% 35%, 18% 18%, 35% 8%, 52% 12%, 68% 5%, 82% 15%, 92% 32%, 100% 52%, 95% 72%, 88% 88%, 70% 100%);
+}
+.blob-wrap.bw3 .bcore{
+  position:absolute;
+  inset:-15%;
+  background:
+    /* olive/green spots — concentrated in CENTRE of blob */
+    radial-gradient(ellipse 10% 7% at 45% 50%, rgba(55,100,8,0.95) 0%, rgba(45,85,6,0.65) 50%, transparent 80%),
+    radial-gradient(ellipse 8% 5% at 55% 60%, rgba(60,108,10,0.9) 0%, transparent 72%),
+    radial-gradient(ellipse 7% 5% at 38% 62%, rgba(50,95,8,0.88) 0%, transparent 70%),
+    radial-gradient(ellipse 6% 4% at 60% 45%, rgba(58,105,9,0.85) 0%, transparent 68%),
+    radial-gradient(ellipse 5% 4% at 42% 42%, rgba(52,98,8,0.82) 0%, transparent 68%),
+    radial-gradient(ellipse 4% 3% at 50% 35%, rgba(48,92,7,0.78) 0%, transparent 65%),
+    radial-gradient(ellipse 6% 4% at 35% 52%, rgba(56,102,9,0.75) 0%, transparent 65%),
+    radial-gradient(ellipse 5% 3% at 62% 55%, rgba(54,100,8,0.72) 0%, transparent 65%),
+    /* baby pink body */
+    radial-gradient(ellipse 88% 98% at 50% 90%, rgba(248,140,162,1) 0%, rgba(252,168,183,0.9) 22%, rgba(254,192,203,0.7) 42%, rgba(255,215,222,0.4) 60%, transparent 78%);
+  filter:blur(22px);
+}
 
 .land-click{
-  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
-  z-index:3;
-  font-family:var(--mono);font-size:.58rem;
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  z-index:5;
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight:400;font-size:.62rem;
   letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(255,255,255,.28);
+  color:rgba(0,0,0,0.35);
   animation:pulse 2.5s ease-in-out infinite;
-  pointer-events:none;
+  pointer-events:none;white-space:nowrap;
 }
-@keyframes pulse{0%,100%{opacity:.28}50%{opacity:.55}}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.7}}
 
 .land-name{
-  position:absolute;bottom:.9rem;right:1.25rem;z-index:3;
-  font-family:var(--mono);font-size:.5rem;
-  letter-spacing:.16em;text-transform:uppercase;
-  color:rgba(255,255,255,.15);
+  position:absolute;bottom:.8rem;right:1.5rem;z-index:5;
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight:400;font-size:.52rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(0,0,0,0.2);
+}
+
+/* BIG LOGO AREA */
+.land-logo-wrap{
+  flex:1;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  background:#FFFFFF;
+}
+
+.land-click{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  z-index:3;
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight:400;font-size:.65rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(0,0,0,0.3);
+  animation:pulse 2.5s ease-in-out infinite;
+  pointer-events:none;white-space:nowrap;
+}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.65}}
+
+.land-name{
+  position:absolute;bottom:.8rem;right:1.5rem;z-index:3;
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight:400;font-size:.52rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(0,0,0,0.2);
 }
 
 /* ════════════════════════════
@@ -589,7 +718,6 @@ footer{border-top:1px solid var(--bd);padding:1.5rem 2rem;display:flex;justify-c
     </div>
     <div class="land-cell">
       <strong>Carolina Villamayor Acevedo</strong>
-      Madrid, Spain — EU &amp; MX
     </div>
     <div class="land-cell">
       <strong>Marketing &amp; Creative Strategist</strong>
@@ -602,12 +730,10 @@ footer{border-top:1px solid var(--bd);padding:1.5rem 2rem;display:flex;justify-c
   </div>
 
   <div class="land-logo-wrap">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
-    <div class="blob b4"></div>
-    <div class="blob b5"></div>
-    <img src="careyOFFICIAL_logo.png" alt="Carey" class="land-logo" id="landLogo">
+    <div class="blob-wrap bw1"><div class="bcore"></div></div>
+    <div class="blob-wrap bw2"><div class="bcore"></div></div>
+    <div class="blob-wrap bw3"><div class="bcore"></div></div>
+    <div class="land-carey">CAREY</div>
     <div class="land-click">Click anywhere to explore</div>
   </div>
 
