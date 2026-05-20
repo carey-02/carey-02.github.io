@@ -3,1003 +3,1068 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio — Your Name</title>
+<title>Carey — Carolina Villamayor Acevedo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#F4F1E8;
+  --ink:#0C0A08;
+  --mid:#3A3530;
+  --faint:#9A948C;
+  --mag:#A8174A;
+  --plum:#4A1035;
+  --lilac:#C0A8CC;
+  --olive:#5A6A18;
+  --periwinkle:#6878A8;
+  --peach:#D89870;
+  --espresso:#180C08;
+  --cond:'Bebas Neue',sans-serif;
+  --ser:'Cormorant Garamond',Georgia,serif;
+  --mono:'DM Mono',monospace;
+  --bd:rgba(12,10,8,0.11);
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:12px;line-height:1.6;overflow:hidden;cursor:crosshair}
+body.scrollable{overflow:auto}
 
-  :root {
-    --cream: #F7F4EF;
-    --ink: #1A1814;
-    --ink-muted: #6B6760;
-    --ink-light: #B0ADA8;
-    --accent-data: #1D5FA8;
-    --accent-creative: #C4470A;
-    --accent-creative-light: #FAECE7;
-    --accent-data-light: #E6F1FB;
-    --border: rgba(26,24,20,0.12);
-    --serif: 'DM Serif Display', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
-  }
+/* ─── SCREENS ─── */
+.screen{position:fixed;inset:0;z-index:100;transition:opacity .9s ease,visibility .9s}
+.screen.out{opacity:0;visibility:hidden;pointer-events:none}
+#site{position:relative;z-index:1;display:none}
+#site.active{display:block}
 
-  html { scroll-behavior: smooth; }
+/* ════════════════════════════
+   LANDING
+════════════════════════════ */
+#landing{background:var(--ink);display:flex;flex-direction:column;overflow:hidden}
 
-  body {
-    font-family: var(--sans);
-    background: var(--cream);
-    color: var(--ink);
-    font-size: 16px;
-    line-height: 1.65;
-    overflow-x: hidden;
-  }
+.land-top{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:0;flex-shrink:0;
+}
+.land-cell{
+  padding:.9rem 1.25rem;
+  border-right:1px solid rgba(255,255,255,.08);
+  font-family:var(--mono);font-size:.58rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);line-height:1.7;
+}
+.land-cell:last-child{border-right:none}
+.land-cell strong{display:block;color:rgba(255,255,255,.55);font-weight:400}
+#liveclock{font-variant-numeric:tabular-nums}
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.25rem 4rem;
-    background: rgba(247,244,239,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: var(--serif);
-    font-size: 1.2rem;
-    color: var(--ink);
-    text-decoration: none;
-    letter-spacing: -0.02em;
-  }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.82rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--ink); }
-  .nav-cta {
-    font-size: 0.82rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.5rem 1.25rem;
-    border: 1px solid var(--ink);
-    color: var(--ink);
-    text-decoration: none;
-    border-radius: 2rem;
-    transition: background 0.2s, color 0.2s;
-  }
-  .nav-cta:hover { background: var(--ink); color: var(--cream); }
+/* BIG LOGO AREA */
+.land-logo-wrap{
+  flex:1;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
 
-  /* SECTIONS */
-  section { padding: 6rem 4rem; max-width: 1200px; margin: 0 auto; }
-  section + section { border-top: 1px solid var(--border); }
+/* Orchid blobs */
+.blob{
+  position:absolute;border-radius:50%;
+  filter:blur(70px);pointer-events:none;
+  mix-blend-mode:screen;
+}
+.b1{width:55vw;height:55vw;background:radial-gradient(circle,rgba(168,23,74,.55) 0%,transparent 70%);top:-10%;left:-15%}
+.b2{width:45vw;height:45vw;background:radial-gradient(circle,rgba(74,16,53,.6) 0%,transparent 70%);top:10%;right:-10%}
+.b3{width:35vw;height:35vw;background:radial-gradient(circle,rgba(192,168,204,.35) 0%,transparent 70%);bottom:5%;left:30%}
+.b4{width:25vw;height:25vw;background:radial-gradient(circle,rgba(90,106,24,.4) 0%,transparent 70%);bottom:15%;right:5%}
+.b5{width:20vw;height:20vw;background:radial-gradient(circle,rgba(216,152,112,.3) 0%,transparent 70%);top:20%;left:40%}
 
-  /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding-top: 8rem;
-    max-width: 100%;
-    padding-left: 4rem;
-    padding-right: 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-eyebrow {
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    display: inline-block;
-    width: 2rem;
-    height: 1px;
-    background: var(--ink-light);
-  }
-  .hero-name {
-    font-family: var(--serif);
-    font-size: clamp(4rem, 10vw, 9rem);
-    line-height: 0.92;
-    letter-spacing: -0.03em;
-    color: var(--ink);
-    margin-bottom: 1.5rem;
-  }
-  .hero-name em {
-    font-style: italic;
-    color: var(--accent-creative);
-  }
-  .hero-tagline {
-    font-size: 1.1rem;
-    color: var(--ink-muted);
-    font-weight: 300;
-    max-width: 36ch;
-    margin-bottom: 3rem;
-    line-height: 1.7;
-  }
-  .hero-pills {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    margin-bottom: 4rem;
-  }
-  .pill {
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.4rem 1rem;
-    border-radius: 2rem;
-    font-weight: 500;
-  }
-  .pill-data { background: var(--accent-data-light); color: var(--accent-data); }
-  .pill-creative { background: var(--accent-creative-light); color: var(--accent-creative); }
-  .pill-mkt { background: #EAF3DE; color: #3B6D11; }
-  .hero-deco {
-    position: absolute;
-    top: 8rem;
-    right: -2rem;
-    width: 420px;
-    height: 420px;
-    border-radius: 50%;
-    border: 1px solid rgba(26,24,20,0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hero-deco::before {
-    content: '';
-    width: 280px; height: 280px;
-    border-radius: 50%;
-    border: 1px solid rgba(26,24,20,0.08);
-  }
-  .hero-scroll {
-    position: absolute;
-    bottom: 2.5rem;
-    right: 4rem;
-    writing-mode: vertical-rl;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  .hero-scroll::after {
-    content: '';
-    width: 1px;
-    height: 3rem;
-    background: var(--ink-light);
-    animation: scrollLine 1.8s ease-in-out infinite;
-  }
-  @keyframes scrollLine {
-    0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
-    50% { opacity: 1; transform: scaleY(1); }
-  }
+.land-logo{
+  position:relative;z-index:2;
+  width:min(680px,85vw);
+  filter:invert(1);
+  opacity:.93;
+  animation:logofade 1.8s ease forwards;
+}
+@keyframes logofade{from{opacity:0;transform:scale(.97)}to{opacity:.93;transform:scale(1)}}
 
-  /* SECTION LABELS */
-  .section-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 3rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+.land-click{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  z-index:3;
+  font-family:var(--mono);font-size:.58rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.28);
+  animation:pulse 2.5s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes pulse{0%,100%{opacity:.28}50%{opacity:.55}}
 
-  /* ABOUT */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: start;
-  }
-  .about-headline {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 2rem;
-  }
-  .about-headline em { font-style: italic; color: var(--accent-creative); }
-  .about-body {
-    color: var(--ink-muted);
-    font-weight: 300;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-  }
-  .about-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-  .stat-card {
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-  }
-  .stat-num {
-    font-family: var(--serif);
-    font-size: 2.5rem;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: var(--ink);
-    margin-bottom: 0.25rem;
-  }
-  .stat-label {
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-  }
-  .brain-visual {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  .brain-half {
-    padding: 2rem;
-    border-radius: 4px;
-    position: relative;
-    overflow: hidden;
-  }
-  .brain-half-data {
-    background: var(--accent-data-light);
-    border: 1px solid rgba(29,95,168,0.15);
-  }
-  .brain-half-creative {
-    background: var(--accent-creative-light);
-    border: 1px solid rgba(196,71,10,0.15);
-  }
-  .brain-half-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 0.75rem;
-  }
-  .brain-half-data .brain-half-label { color: var(--accent-data); }
-  .brain-half-creative .brain-half-label { color: var(--accent-creative); }
-  .brain-half-title {
-    font-family: var(--serif);
-    font-size: 1.4rem;
-    margin-bottom: 0.75rem;
-  }
-  .brain-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-  .brain-tag {
-    font-size: 0.75rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 2rem;
-    font-weight: 400;
-  }
-  .brain-half-data .brain-tag { background: rgba(29,95,168,0.12); color: var(--accent-data); }
-  .brain-half-creative .brain-tag { background: rgba(196,71,10,0.12); color: var(--accent-creative); }
+.land-name{
+  position:absolute;bottom:.9rem;right:1.25rem;z-index:3;
+  font-family:var(--mono);font-size:.5rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.15);
+}
 
-  /* SKILLS */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-  .skill-card {
-    padding: 2rem;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    transition: border-color 0.25s, transform 0.25s;
-  }
-  .skill-card:hover { border-color: rgba(26,24,20,0.3); transform: translateY(-2px); }
-  .skill-icon {
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.25rem;
-    font-size: 1.1rem;
-  }
-  .skill-icon-data { background: var(--accent-data-light); }
-  .skill-icon-creative { background: var(--accent-creative-light); }
-  .skill-icon-mkt { background: #EAF3DE; }
-  .skill-name {
-    font-weight: 500;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  .skill-desc {
-    font-size: 0.85rem;
-    color: var(--ink-muted);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
-  .skill-tools {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-  .skill-tool {
-    font-size: 0.7rem;
-    letter-spacing: 0.04em;
-    padding: 0.2rem 0.6rem;
-    background: rgba(26,24,20,0.06);
-    color: var(--ink-muted);
-    border-radius: 2rem;
-  }
+/* ════════════════════════════
+   SPLIT
+════════════════════════════ */
+#split{background:var(--paper);display:flex;flex-direction:column}
 
-  /* PROJECTS */
-  .projects-list { display: flex; flex-direction: column; gap: 2px; }
-  .project-row {
-    display: grid;
-    grid-template-columns: 3rem 1fr auto auto;
-    align-items: center;
-    gap: 2rem;
-    padding: 1.75rem 0;
-    border-top: 1px solid var(--border);
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    transition: padding-left 0.25s;
-    position: relative;
-  }
-  .project-row:hover { padding-left: 0.75rem; }
-  .project-row:hover .project-arrow { opacity: 1; transform: translate(4px, -4px); }
-  .project-num {
-    font-size: 0.75rem;
-    color: var(--ink-light);
-    font-variant-numeric: tabular-nums;
-  }
-  .project-info {}
-  .project-title {
-    font-family: var(--serif);
-    font-size: 1.35rem;
-    letter-spacing: -0.01em;
-    margin-bottom: 0.25rem;
-    line-height: 1.2;
-  }
-  .project-sub {
-    font-size: 0.82rem;
-    color: var(--ink-muted);
-  }
-  .project-type {
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.9rem;
-    border-radius: 2rem;
-    white-space: nowrap;
-  }
-  .project-arrow {
-    font-size: 1.2rem;
-    color: var(--ink-muted);
-    opacity: 0;
-    transition: opacity 0.2s, transform 0.25s;
-  }
+.split-q{
+  padding:2rem 2.5rem 1.5rem;
+  font-family:var(--ser);font-style:italic;
+  font-size:clamp(.85rem,1.5vw,1.1rem);
+  color:var(--faint);letter-spacing:.04em;
+  border-bottom:1px solid var(--bd);
+}
 
-  /* CERTIFICATIONS */
-  .certs-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-  .cert-card {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    padding: 1.25rem 1.5rem;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    transition: border-color 0.2s;
-  }
-  .cert-card:hover { border-color: rgba(26,24,20,0.3); }
-  .cert-badge {
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    flex-shrink: 0;
-  }
-  .cert-info {}
-  .cert-name { font-weight: 500; font-size: 0.92rem; margin-bottom: 0.15rem; }
-  .cert-issuer { font-size: 0.78rem; color: var(--ink-muted); }
-  .cert-year { font-size: 0.72rem; color: var(--ink-light); margin-top: 0.15rem; }
+.split-doors{
+  flex:1;display:grid;grid-template-columns:1fr 1fr;
+  position:relative;
+}
+.split-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:1px;background:var(--bd);z-index:2;pointer-events:none;
+}
+.door{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:3rem 2.5rem;cursor:crosshair;
+  border:none;background:transparent;text-align:left;
+  transition:background .4s;position:relative;overflow:hidden;
+}
+.door::after{
+  content:'';position:absolute;inset:0;opacity:0;
+  transition:opacity .4s;pointer-events:none;
+}
+.door.dc::after{background:radial-gradient(ellipse at 30% 70%,rgba(168,23,74,.06) 0%,transparent 70%)}
+.door.da::after{background:radial-gradient(ellipse at 70% 30%,rgba(104,120,168,.06) 0%,transparent 70%)}
+.door:hover::after{opacity:1}
 
-  /* WOM */
-  .wom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .wom-card {
-    padding: 2rem;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    position: relative;
-  }
-  .wom-quote-mark {
-    font-family: var(--serif);
-    font-size: 4rem;
-    line-height: 1;
-    color: var(--accent-creative-light);
-    margin-bottom: 0.5rem;
-    display: block;
-  }
-  .wom-text {
-    font-style: italic;
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: var(--ink);
-    margin-bottom: 1.5rem;
-  }
-  .wom-author { font-size: 0.82rem; }
-  .wom-name { font-weight: 500; color: var(--ink); }
-  .wom-role { color: var(--ink-muted); }
+.door-num{
+  font-family:var(--mono);font-size:.55rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:1.25rem;
+}
+.door-big{
+  font-family:var(--cond);
+  font-size:clamp(3.5rem,7vw,7.5rem);
+  letter-spacing:.04em;line-height:.88;
+  color:var(--ink);margin-bottom:.5rem;
+  transition:color .3s;
+}
+.door-small{
+  font-family:var(--cond);
+  font-size:clamp(1.4rem,2.5vw,2.2rem);
+  letter-spacing:.06em;color:var(--faint);
+  transition:color .3s;
+}
+.door.dc:hover .door-big,.door.dc:hover .door-small{color:var(--mag)}
+.door.da:hover .door-big,.door.da:hover .door-small{color:var(--periwinkle)}
 
-  /* INTERESTS */
-  .interests-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
-  }
-  .interest-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.65rem 1.25rem;
-    border: 1px solid var(--border);
-    border-radius: 2rem;
-    font-size: 0.88rem;
-    color: var(--ink-muted);
-    transition: border-color 0.2s, color 0.2s, background 0.2s;
-    cursor: default;
-  }
-  .interest-item:hover {
-    border-color: var(--ink);
-    color: var(--ink);
-    background: rgba(26,24,20,0.03);
-  }
-  .interest-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
+.door-hint{
+  position:absolute;bottom:2rem;
+  font-family:var(--mono);font-size:.52rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--faint);opacity:0;transition:opacity .3s;
+}
+.door:hover .door-hint{opacity:1}
+.door.dc .door-hint{left:2.5rem}
+.door.da .door-hint{right:2.5rem}
 
-  /* CONTACT */
-  .contact-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: start;
-  }
-  .contact-headline {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-  }
-  .contact-headline em { font-style: italic; color: var(--accent-creative); }
-  .contact-body { color: var(--ink-muted); font-weight: 300; line-height: 1.8; }
-  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
-  .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
-  .form-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-  }
-  .form-field input,
-  .form-field textarea {
-    font-family: var(--sans);
-    font-size: 0.95rem;
-    padding: 0.75rem 1rem;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.2s;
-    width: 100%;
-    resize: vertical;
-  }
-  .form-field input:focus,
-  .form-field textarea:focus { border-color: rgba(26,24,20,0.5); }
-  .form-submit {
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.9rem 2rem;
-    background: var(--ink);
-    color: var(--cream);
-    border: none;
-    border-radius: 2rem;
-    cursor: pointer;
-    align-self: flex-start;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .form-submit:hover { background: #333; transform: translateY(-1px); }
-  .contact-links { display: flex; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
-  .contact-link {
-    font-size: 0.82rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color 0.2s;
-  }
-  .contact-link:hover { color: var(--ink); }
-  .contact-link svg { width: 14px; height: 14px; }
+/* sig transition overlay */
+#sig-transition{
+  position:fixed;inset:0;z-index:999;
+  background:var(--paper);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .5s;
+}
+#sig-transition.show{opacity:1;pointer-events:all}
+#sig-transition img{
+  width:min(400px,70vw);
+  opacity:0;
+  animation:sigpop .8s ease .3s forwards;
+}
+@keyframes sigpop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
 
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .footer-copy { font-size: 0.78rem; color: var(--ink-light); }
-  .footer-credit { font-size: 0.78rem; color: var(--ink-light); }
+/* ════════════════════════════
+   SITE / LONG SCROLL
+════════════════════════════ */
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:500;
+  height:50px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;
+  background:rgba(244,241,232,.94);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--bd);
+}
+.nav-sig{height:26px;opacity:.7}
+.nav-r{display:flex;align-items:center;gap:2rem}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{
+  font-family:var(--mono);font-size:.55rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--faint);text-decoration:none;transition:color .2s;
+}
+.nav-links a:hover{color:var(--ink)}
+.mode-pill{
+  font-family:var(--mono);font-size:.52rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:.28rem .85rem;border:1px solid var(--bd);
+  background:transparent;cursor:crosshair;color:var(--faint);
+  transition:all .2s;white-space:nowrap;
+}
+body.mc .mode-pill{border-color:var(--mag);color:var(--mag)}
+body.ma .mode-pill{border-color:var(--periwinkle);color:var(--periwinkle)}
 
-  /* FADE-IN ANIMATION */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+/* mode bar */
+.mbar{position:fixed;top:0;left:0;right:0;height:2px;z-index:600;pointer-events:none}
+.mbar-c{position:absolute;top:0;left:0;width:50%;height:100%;background:var(--mag);transform:scaleX(0);transform-origin:left;transition:transform .6s ease}
+.mbar-a{position:absolute;top:0;right:0;width:50%;height:100%;background:var(--periwinkle);transform:scaleX(0);transform-origin:right;transition:transform .6s ease}
+body.mc .mbar-c{transform:scaleX(1)}
+body.ma .mbar-a{transform:scaleX(1)}
 
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    section { padding: 4rem 1.5rem; }
-    #hero { padding-left: 1.5rem; padding-right: 1.5rem; min-height: auto; padding-top: 7rem; padding-bottom: 4rem; }
-    .about-grid, .contact-split { grid-template-columns: 1fr; gap: 3rem; }
-    .skills-grid { grid-template-columns: 1fr 1fr; }
-    .certs-grid, .wom-grid { grid-template-columns: 1fr; }
-    .hero-deco { display: none; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
-    .nav-links { display: none; }
-  }
+/* SECTIONS */
+.w{max-width:1360px;margin:0 auto;padding:0 2rem}
+section{padding:5rem 0}
+section+section{border-top:1px solid var(--bd)}
+
+.sh{/* section header */
+  display:flex;align-items:baseline;justify-content:space-between;
+  padding-bottom:.75rem;border-bottom:1px solid var(--bd);
+  margin-bottom:3.5rem;
+}
+.sh-l{font-family:var(--mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.sh-r{font-family:var(--cond);font-size:1.3rem;letter-spacing:.06em;color:var(--faint)}
+
+/* ── INTRO / ABOUT ── */
+#intro{padding-top:4rem}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.intro-left{}
+.intro-big{
+  font-family:var(--cond);
+  font-size:clamp(4rem,9vw,10rem);
+  line-height:.85;letter-spacing:.02em;
+  color:var(--ink);margin-bottom:1.5rem;
+}
+.intro-big .hit{color:var(--mag)}
+.intro-sub{
+  font-family:var(--mono);font-size:.62rem;
+  letter-spacing:.06em;color:var(--mid);
+  line-height:1.9;margin-bottom:2rem;
+}
+.intro-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:2.5rem}
+.itag{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;
+  padding:.28rem .7rem;border:1px solid var(--bd);color:var(--mid);
+}
+.itag.c{border-color:var(--mag);color:var(--mag)}
+.itag.a{border-color:var(--periwinkle);color:var(--periwinkle)}
+
+.intro-right{}
+.intro-who{
+  font-family:var(--ser);font-size:clamp(1rem,1.8vw,1.25rem);
+  font-weight:300;line-height:1.75;color:var(--mid);
+  margin-bottom:1.75rem;
+}
+.intro-who em{font-style:italic;color:var(--ink)}
+.carey-aside{
+  padding:1.75rem 2rem;
+  border-top:2px solid var(--mag);
+  background:rgba(168,23,74,.03);
+  margin-top:2rem;
+}
+.carey-aside-lbl{
+  font-family:var(--mono);font-size:.52rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mag);margin-bottom:.65rem;
+}
+.carey-aside-txt{
+  font-family:var(--ser);font-style:italic;
+  font-size:1rem;color:var(--ink);line-height:1.65;
+}
+
+/* ── TRAJECTORY ── */
+.traj-item{
+  display:grid;grid-template-columns:130px 1fr 100px;
+  gap:2rem;padding:1.6rem 0;
+  border-top:1px solid var(--bd);align-items:start;
+}
+.traj-date{font-family:var(--mono);font-size:.56rem;color:var(--faint);letter-spacing:.04em;padding-top:.1rem;line-height:1.8}
+.traj-main{}
+.traj-role{font-family:var(--cond);font-size:1.5rem;letter-spacing:.04em;line-height:1;margin-bottom:.25rem}
+.traj-co{font-family:var(--mono);font-size:.58rem;color:var(--faint);margin-bottom:.55rem;letter-spacing:.03em}
+.traj-desc{font-family:var(--ser);font-size:.88rem;font-weight:300;color:var(--mid);line-height:1.75}
+.tbadge{
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.22rem .55rem;border:1px solid;align-self:flex-start;justify-self:end;margin-top:.15rem;
+}
+.tbadge.c{border-color:var(--mag);color:var(--mag)}
+.tbadge.a{border-color:var(--periwinkle);color:var(--periwinkle)}
+.tbadge.b{border-color:var(--olive);color:var(--olive)}
+
+/* ── LANGUAGES / VALUES ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+.lang-item{display:flex;justify-content:space-between;align-items:baseline;padding:.55rem 0;border-bottom:1px solid var(--bd)}
+.lang-name{font-family:var(--ser);font-size:1.05rem;font-weight:300}
+.lang-lvl{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.values-list{display:flex;flex-direction:column;gap:.5rem}
+.val{font-family:var(--ser);font-style:italic;font-size:1rem;color:var(--mid);padding:.5rem 0;border-bottom:1px solid var(--bd)}
+
+/* ── IDENTITY / ABOUT CAREY ── */
+.identity-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem}
+.id-card{padding:1.75rem;border:1px solid var(--bd)}
+.id-card-lbl{font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:.75rem}
+.id-card-val{font-family:var(--ser);font-size:.95rem;font-weight:300;color:var(--mid);line-height:1.7}
+
+/* ── EDUCATION ── */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.edu-card{padding:2rem;border:1px solid var(--bd)}
+.edu-yr{font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;color:var(--faint);margin-bottom:.6rem}
+.edu-deg{font-family:var(--cond);font-size:1.7rem;letter-spacing:.04em;line-height:.95;margin-bottom:.35rem}
+.edu-school{font-family:var(--mono);font-size:.58rem;color:var(--mid);margin-bottom:.2rem}
+.edu-loc{font-family:var(--mono);font-size:.55rem;color:var(--faint)}
+.edu-note{margin-top:.85rem;font-family:var(--ser);font-style:italic;font-size:.82rem;color:var(--mag)}
+
+/* ── SKILLS ── */
+.skills-wrap{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--bd)}
+.sk-col{padding:2.5rem}
+.sk-col+.sk-col{border-left:1px solid var(--bd)}
+.sk-head{font-family:var(--cond);font-size:2rem;letter-spacing:.06em;margin-bottom:1.75rem;padding-bottom:.9rem;border-bottom:1px solid}
+.sk-col.c .sk-head{color:var(--mag);border-color:rgba(168,23,74,.2)}
+.sk-col.a .sk-head{color:var(--periwinkle);border-color:rgba(104,120,168,.25)}
+.sk-g{margin-bottom:1.4rem}
+.sk-g-lbl{font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:.5rem}
+.chips{display:flex;flex-wrap:wrap;gap:.32rem}
+.chip{font-family:var(--mono);font-size:.58rem;padding:.26rem .62rem;background:rgba(12,10,8,.05);color:var(--mid)}
+
+/* ── CERTIFICATIONS ── */
+.cert-item{
+  display:grid;grid-template-columns:1fr auto auto 8px;
+  gap:1.5rem;padding:.95rem 0;
+  border-top:1px solid var(--bd);align-items:center;
+  transition:opacity .4s;
+}
+.cert-name{font-family:var(--ser);font-size:.9rem;font-weight:400}
+.cert-sub{font-family:var(--mono);font-size:.55rem;color:var(--faint)}
+.cert-iss{font-family:var(--mono);font-size:.55rem;color:var(--faint);text-align:right}
+.cert-yr{font-family:var(--mono);font-size:.55rem;color:var(--faint);min-width:3ch;text-align:right}
+.cert-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.cert-item.c .cert-dot{background:var(--mag)}
+.cert-item.a .cert-dot{background:var(--periwinkle)}
+body.mc .cert-item.a{opacity:.3}
+body.ma .cert-item.c{opacity:.3}
+
+/* ── DIG DEEPER ── */
+.dig-wrap{
+  display:grid;grid-template-columns:1fr 1fr;
+  border:1px solid var(--bd);margin-top:1rem;
+}
+.dig-side{
+  padding:2.5rem;cursor:crosshair;
+  transition:background .3s;text-decoration:none;color:inherit;
+  display:block;
+}
+.dig-side+.dig-side{border-left:1px solid var(--bd)}
+.dig-side:hover{background:rgba(12,10,8,.02)}
+.dig-side.dc:hover{background:rgba(168,23,74,.03)}
+.dig-side.da:hover{background:rgba(104,120,168,.04)}
+.dig-lbl{font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:.75rem}
+.dig-title{font-family:var(--cond);font-size:clamp(2rem,4vw,3.5rem);letter-spacing:.04em;line-height:.9;margin-bottom:.65rem;transition:color .3s}
+.dig-side.dc:hover .dig-title{color:var(--mag)}
+.dig-side.da:hover .dig-title{color:var(--periwinkle)}
+.dig-desc{font-family:var(--mono);font-size:.58rem;color:var(--faint);line-height:1.85}
+.dig-arr{display:inline-block;margin-top:1rem;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;color:var(--faint);transition:color .3s,transform .25s}
+.dig-side:hover .dig-arr{transform:translate(3px,-3px);color:var(--ink)}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.contact-big{font-family:var(--cond);font-size:clamp(3rem,7vw,7.5rem);line-height:.88;letter-spacing:.02em;margin-bottom:2rem}
+.contact-big .hit{color:var(--mag)}
+.contact-info{font-family:var(--mono);font-size:.63rem;color:var(--mid);line-height:2.3}
+.contact-info a{color:inherit;text-decoration:none;border-bottom:1px solid var(--bd);transition:color .2s,border-color .2s}
+.contact-info a:hover{color:var(--mag);border-color:var(--mag)}
+.contact-loc{margin-top:1.5rem;font-family:var(--mono);font-size:.55rem;color:var(--faint);line-height:1.9}
+.contact-loc em{font-style:italic;font-size:.52rem;opacity:.75}
+.cf{display:flex;flex-direction:column;gap:.65rem}
+.fr{display:flex;flex-direction:column;gap:.28rem}
+.fl{font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.fr input,.fr textarea{
+  font-family:var(--mono);font-size:.65rem;padding:.65rem 0;
+  background:transparent;border:none;border-bottom:1px solid var(--bd);
+  color:var(--ink);outline:none;width:100%;resize:none;transition:border-color .2s;
+}
+.fr input:focus,.fr textarea:focus{border-color:var(--mag)}
+.fsub{
+  font-family:var(--cond);font-size:1.15rem;letter-spacing:.1em;
+  padding:.55rem 2rem;background:var(--ink);color:var(--paper);
+  border:none;cursor:crosshair;align-self:flex-start;margin-top:.65rem;
+  transition:background .25s;
+}
+.fsub:hover{background:var(--mag)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--bd);padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;max-width:1360px;margin:0 auto}
+.fl2{font-family:var(--ser);font-style:italic;font-size:.82rem;color:var(--faint)}
+.fr2{font-family:var(--mono);font-size:.52rem;letter-spacing:.1em;color:var(--faint);text-align:right;line-height:2}
+
+/* ════════════════════════════
+   DEEP DIVE PAGES
+════════════════════════════ */
+.deep-page{
+  display:none;min-height:100vh;
+  background:var(--paper);
+}
+.deep-page.show{display:block}
+
+/* CREATIVE deep */
+.cp-hero{
+  min-height:70vh;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;border-bottom:1px solid var(--bd);
+  padding:6rem 2rem 3rem;
+  align-items:end;
+  position:relative;overflow:hidden;
+}
+.cp-hero-big{
+  font-family:var(--cond);
+  font-size:clamp(5rem,14vw,13rem);
+  line-height:.85;letter-spacing:.02em;
+  color:var(--ink);grid-column:1/3;align-self:end;
+}
+.cp-hero-big .hit{color:var(--mag)}
+.cp-hero-meta{
+  grid-column:3;align-self:end;padding-left:2rem;
+  font-family:var(--mono);font-size:.6rem;
+  color:var(--faint);line-height:2;
+  border-left:1px solid var(--bd);
+}
+
+/* image grid for creative */
+.cp-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;border-bottom:1px solid var(--bd);
+}
+.cp-cell{
+  aspect-ratio:3/4;overflow:hidden;position:relative;
+  border-right:1px solid var(--bd);
+}
+.cp-cell:last-child{border-right:none}
+.cp-cell-bg{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--cond);font-size:4rem;color:rgba(12,10,8,.06);
+  letter-spacing:.1em;
+}
+/* Orchid blur placeholders for creative cells */
+.oc1{background:radial-gradient(ellipse at 40% 60%,rgba(168,23,74,.18) 0%,rgba(244,241,232,1) 65%)}
+.oc2{background:radial-gradient(ellipse at 60% 40%,rgba(74,16,53,.14) 0%,rgba(244,241,232,1) 65%)}
+.oc3{background:radial-gradient(ellipse at 30% 70%,rgba(192,168,204,.2) 0%,rgba(244,241,232,1) 65%)}
+.oc4{background:radial-gradient(ellipse at 70% 30%,rgba(90,106,24,.14) 0%,rgba(244,241,232,1) 65%)}
+.cp-cell-label{
+  position:absolute;bottom:1rem;left:1rem;right:1rem;
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--mid);
+}
+
+.cp-proj-item{
+  display:grid;grid-template-columns:56px 1fr 110px 20px;
+  gap:1.5rem;padding:1.75rem 0;
+  border-top:1px solid var(--bd);align-items:center;
+  text-decoration:none;color:inherit;cursor:crosshair;
+  transition:padding-left .3s;
+}
+.cp-proj-item:hover{padding-left:1rem}
+.cp-proj-item:hover .parr{opacity:1;transform:translate(3px,-3px)}
+.pn{font-family:var(--mono);font-size:.56rem;color:var(--faint)}
+.pmain{}
+.ptitle{font-family:var(--cond);font-size:1.55rem;letter-spacing:.04em;line-height:1;margin-bottom:.2rem}
+.psub{font-family:var(--mono);font-size:.56rem;color:var(--faint);line-height:1.75}
+.pbadge{font-family:var(--mono);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;padding:.22rem .55rem;border:1px solid;white-space:nowrap}
+.pbadge.c{border-color:var(--mag);color:var(--mag)}
+.pbadge.b{border-color:var(--olive);color:var(--olive)}
+.parr{font-size:.85rem;color:var(--faint);opacity:0;transition:opacity .2s,transform .25s}
+
+/* ANALYTICAL deep */
+.ap-hero{
+  padding:6rem 2rem 3rem;
+  border-bottom:1px solid var(--bd);
+  display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:end;
+}
+.ap-hero-big{
+  font-family:var(--cond);
+  font-size:clamp(4rem,12vw,11rem);
+  line-height:.85;letter-spacing:.02em;color:var(--ink);
+}
+.ap-hero-big .hit{color:var(--periwinkle)}
+.ap-hero-desc{font-family:var(--ser);font-size:.9rem;font-weight:300;color:var(--mid);line-height:1.8;align-self:end}
+
+/* purple.fr style listing */
+.ap-list-header{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  padding:.55rem 0;border-bottom:1px solid var(--bd);
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--faint);
+}
+.ap-list-row{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  padding:.75rem 0;border-bottom:1px solid var(--bd);
+  font-family:var(--mono);font-size:.62rem;color:var(--mid);
+  transition:background .18s;cursor:crosshair;
+}
+.ap-list-row:hover{background:rgba(12,10,8,.025)}
+.ap-list-row .bold{font-family:var(--ser);font-size:.82rem;font-weight:400;color:var(--ink)}
+
+/* abstract blob for analytical */
+.ap-blob-section{
+  padding:3rem 2rem;border-bottom:1px solid var(--bd);
+  position:relative;overflow:hidden;min-height:200px;
+  display:flex;align-items:center;
+}
+.ap-blob{
+  width:340px;height:220px;
+  background:radial-gradient(ellipse at 50% 50%,rgba(104,120,168,.45) 0%,rgba(168,23,74,.1) 50%,transparent 75%);
+  filter:blur(50px);position:absolute;left:2rem;
+  pointer-events:none;
+}
+.ap-blob-text{
+  position:relative;z-index:1;margin-left:380px;
+  font-family:var(--ser);font-size:1rem;font-weight:300;color:var(--mid);
+  line-height:1.8;max-width:48ch;
+}
+
+.ap-proj-item{
+  display:grid;grid-template-columns:56px 1fr 120px 20px;
+  gap:1.5rem;padding:1.75rem 0;
+  border-top:1px solid var(--bd);align-items:start;
+  text-decoration:none;color:inherit;cursor:crosshair;
+  transition:padding-left .3s;
+}
+.ap-proj-item:hover{padding-left:1rem}
+.ap-proj-item:hover .parr{opacity:1;transform:translate(3px,-3px)}
+
+/* BACK BTN */
+.back-btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--faint);text-decoration:none;cursor:crosshair;
+  transition:color .2s;padding:1rem 2rem;border-bottom:1px solid var(--bd);
+  width:100%;
+}
+.back-btn:hover{color:var(--ink)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+
+@media(max-width:860px){
+  .land-top{grid-template-columns:1fr 1fr}
+  .land-cell:nth-child(3){border-top:1px solid rgba(255,255,255,.08)}
+  .split-doors{grid-template-columns:1fr;min-height:auto}
+  .door.dc{border-bottom:1px solid var(--bd)}
+  .split-line{display:none}
+  .intro-grid,.two-col,.identity-grid,.contact-grid{grid-template-columns:1fr;gap:3rem}
+  .identity-grid{grid-template-columns:1fr 1fr}
+  .skills-wrap,.dig-wrap,.edu-grid,.cp-grid{grid-template-columns:1fr}
+  .sk-col+.sk-col{border-left:none;border-top:1px solid var(--bd)}
+  .traj-item{grid-template-columns:1fr;gap:.35rem}
+  .tbadge{justify-self:start}
+  .cp-hero,.ap-hero{grid-template-columns:1fr;gap:2rem}
+  .ap-list-header,.ap-list-row{grid-template-columns:1fr 1fr;gap:.5rem}
+  .ap-blob-text{margin-left:0;margin-top:200px}
+  .cp-proj-item,.ap-proj-item{grid-template-columns:40px 1fr;gap:.75rem}
+  .pbadge,.parr{display:none}
+  nav{padding:0 1rem}
+  .nav-links{display:none}
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#hero" class="nav-logo">YN.</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#certifications">Certifications</a></li>
-    <li><a href="#wom">Testimonials</a></li>
-    <li><a href="#interests">Interests</a></li>
-  </ul>
-  <a href="#contact" class="nav-cta">Get in touch</a>
-</nav>
-
-<!-- HERO -->
-<div id="hero">
-  <div class="hero-deco"></div>
-  <div class="hero-eyebrow">Creative · Marketing · Data Analytics</div>
-  <h1 class="hero-name">Your<br><em>Name</em></h1>
-  <p class="hero-tagline">I build things that are as beautiful as they are insightful — bridging creative storytelling with data-driven strategy.</p>
-  <div class="hero-pills">
-    <span class="pill pill-data">Data Analytics</span>
-    <span class="pill pill-creative">Creative Direction</span>
-    <span class="pill pill-mkt">Marketing Strategy</span>
+<!-- ════ LANDING ════ -->
+<div id="landing" class="screen">
+  <div class="land-top">
+    <div class="land-cell">
+      <strong>Based in Madrid</strong>
+      <span id="liveclock"></span>
+    </div>
+    <div class="land-cell">
+      <strong>Carolina Villamayor Acevedo</strong>
+      Madrid, Spain — EU &amp; MX
+    </div>
+    <div class="land-cell">
+      <strong>Marketing &amp; Creative Strategist</strong>
+      Data Analytics
+    </div>
+    <div class="land-cell">
+      <strong>somewhere between concept</strong>
+      and becoming
+    </div>
   </div>
-  <div class="hero-scroll">Scroll</div>
+
+  <div class="land-logo-wrap">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="blob b4"></div>
+    <div class="blob b5"></div>
+    <img src="careyOFFICIAL_logo.png" alt="Carey" class="land-logo" id="landLogo">
+    <div class="land-click">Click anywhere to explore</div>
+  </div>
+
+  <div class="land-name">carey-02.github.io</div>
 </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label">About me</div>
-  <div class="about-grid">
-    <div class="reveal">
-      <h2 class="about-headline">Two sides of the same <em>brain.</em></h2>
-      <p class="about-body">I'm a hybrid professional who believes the best work lives at the intersection of art and evidence. While others choose between left and right brain, I've spent my career refusing to.</p>
-      <p class="about-body">With a background spanning creative production, marketing campaigns, and data analytics, I bring rigour to creative decisions and imagination to analytical ones.</p>
-      <div class="about-stats">
-        <div class="stat-card">
-          <div class="stat-num">5+</div>
-          <div class="stat-label">Years experience</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">30+</div>
-          <div class="stat-label">Projects delivered</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">3</div>
-          <div class="stat-label">Core disciplines</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">∞</div>
-          <div class="stat-label">Curiosity</div>
-        </div>
-      </div>
-    </div>
-    <div class="brain-visual reveal" style="transition-delay: 0.15s;">
-      <div class="brain-half brain-half-data">
-        <div class="brain-half-label">Left brain</div>
-        <div class="brain-half-title">The Analyst</div>
-        <p style="font-size: 0.88rem; color: var(--ink-muted); line-height: 1.6;">Turning raw data into clarity. Building dashboards, uncovering patterns, and making numbers mean something.</p>
-        <div class="brain-tags">
-          <span class="brain-tag">SQL</span>
-          <span class="brain-tag">Python</span>
-          <span class="brain-tag">Tableau</span>
-          <span class="brain-tag">GA4</span>
-          <span class="brain-tag">A/B Testing</span>
-        </div>
-      </div>
-      <div class="brain-half brain-half-creative">
-        <div class="brain-half-label">Right brain</div>
-        <div class="brain-half-title">The Creative</div>
-        <p style="font-size: 0.88rem; color: var(--ink-muted); line-height: 1.6;">Shaping narratives, directing campaigns, and making brands feel human. Strategy with soul.</p>
-        <div class="brain-tags">
-          <span class="brain-tag">Brand Strategy</span>
-          <span class="brain-tag">Copywriting</span>
-          <span class="brain-tag">Art Direction</span>
-          <span class="brain-tag">Social</span>
-        </div>
-      </div>
-    </div>
+<!-- ════ SPLIT ════ -->
+<div id="split" class="screen out">
+  <div class="split-q">Which side are you looking for?</div>
+  <div class="split-doors">
+    <div class="split-line"></div>
+    <button class="door dc" onclick="chooseSide('creative')">
+      <div class="door-num">Right Hemisphere (I)</div>
+      <div class="door-big">CREATIVE<br>MIND</div>
+      <div class="door-small">Art Direction · Brand Strategy<br>Fashion Marketing · Visual Communication</div>
+      <div class="door-hint">Enter →</div>
+    </button>
+    <button class="door da" onclick="chooseSide('analytical')">
+      <div class="door-num">Prefrontal Cortex (II)</div>
+      <div class="door-big">ANALYTICAL<br>MIND</div>
+      <div class="door-small">Data Analytics · KPI Reporting<br>Python · SQL · Campaign Forecasting</div>
+      <div class="door-hint">Enter →</div>
+    </button>
   </div>
-</section>
+</div>
 
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-label">Skills</div>
-  <div class="skills-grid">
-    <div class="skill-card reveal">
-      <div class="skill-icon skill-icon-data">📊</div>
-      <div class="skill-name">Data Analytics</div>
-      <div class="skill-desc">Extracting stories from datasets, building dashboards, and turning complex metrics into clear decisions.</div>
-      <div class="skill-tools">
-        <span class="skill-tool">SQL</span>
-        <span class="skill-tool">Python</span>
-        <span class="skill-tool">Tableau</span>
-        <span class="skill-tool">Power BI</span>
-        <span class="skill-tool">BigQuery</span>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="transition-delay: 0.1s;">
-      <div class="skill-icon skill-icon-mkt">📣</div>
-      <div class="skill-name">Marketing Strategy</div>
-      <div class="skill-desc">Full-funnel campaign planning, audience segmentation, and performance marketing grounded in data.</div>
-      <div class="skill-tools">
-        <span class="skill-tool">GA4</span>
-        <span class="skill-tool">Meta Ads</span>
-        <span class="skill-tool">HubSpot</span>
-        <span class="skill-tool">SEO</span>
-        <span class="skill-tool">Email</span>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="transition-delay: 0.2s;">
-      <div class="skill-icon skill-icon-creative">✏️</div>
-      <div class="skill-name">Creative Direction</div>
-      <div class="skill-desc">Visual storytelling, brand voice, and campaign concepts that resonate emotionally and perform commercially.</div>
-      <div class="skill-tools">
-        <span class="skill-tool">Figma</span>
-        <span class="skill-tool">Adobe CC</span>
-        <span class="skill-tool">Copywriting</span>
-        <span class="skill-tool">Art Direction</span>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="transition-delay: 0.1s;">
-      <div class="skill-icon skill-icon-data">🔍</div>
-      <div class="skill-name">Research & Insights</div>
-      <div class="skill-desc">Qualitative and quantitative research methods to understand audiences and validate creative hypotheses.</div>
-      <div class="skill-tools">
-        <span class="skill-tool">User Research</span>
-        <span class="skill-tool">Surveys</span>
-        <span class="skill-tool">Focus Groups</span>
-        <span class="skill-tool">Desk Research</span>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="transition-delay: 0.2s;">
-      <div class="skill-icon skill-icon-mkt">📱</div>
-      <div class="skill-name">Content & Social</div>
-      <div class="skill-desc">Creating content that converts — from platform strategy to copy to production oversight.</div>
-      <div class="skill-tools">
-        <span class="skill-tool">TikTok</span>
-        <span class="skill-tool">Instagram</span>
-        <span class="skill-tool">LinkedIn</span>
-        <span class="skill-tool">Content Planning</span>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="transition-delay: 0.3s;">
-      <div class="skill-icon skill-icon-creative">🎨</div>
-      <div class="skill-name">Brand Development</div>
-      <div class="skill-desc">Building brand systems from the ground up — identity, tone, positioning, and the rules that keep it consistent.</div>
-      <div class="skill-tools">
-        <span class="skill-tool">Brand Strategy</span>
-        <span class="skill-tool">Identity Design</span>
-        <span class="skill-tool">Guidelines</span>
-        <span class="skill-tool">Naming</span>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- ════ SIG TRANSITION ════ -->
+<div id="sig-transition">
+  <img src="carey_signature_logo.jpeg" alt="carey signature" id="sigImg">
+</div>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">Projects / Work</div>
-  <div class="projects-list">
-    <a href="#" class="project-row reveal">
-      <span class="project-num">01</span>
-      <div class="project-info">
-        <div class="project-title">Brand Refresh & Campaign Launch</div>
-        <div class="project-sub">Full creative direction + performance tracking for rebrand campaign</div>
-      </div>
-      <span class="pill pill-creative" style="font-size: 0.7rem;">Creative</span>
-      <span class="project-arrow">↗</span>
-    </a>
-    <a href="#" class="project-row reveal" style="transition-delay: 0.08s;">
-      <span class="project-num">02</span>
-      <div class="project-info">
-        <div class="project-title">Customer Analytics Dashboard</div>
-        <div class="project-sub">Real-time reporting suite built in Tableau for e-commerce client</div>
-      </div>
-      <span class="pill pill-data" style="font-size: 0.7rem;">Data</span>
-      <span class="project-arrow">↗</span>
-    </a>
-    <a href="#" class="project-row reveal" style="transition-delay: 0.14s;">
-      <span class="project-num">03</span>
-      <div class="project-info">
-        <div class="project-title">Integrated Marketing Strategy</div>
-        <div class="project-sub">Multi-channel strategy combining paid, organic and influencer — 3.2× ROI</div>
-      </div>
-      <span class="pill pill-mkt" style="font-size: 0.7rem; background: #EAF3DE; color: #3B6D11;">Marketing</span>
-      <span class="project-arrow">↗</span>
-    </a>
-    <a href="#" class="project-row reveal" style="transition-delay: 0.2s;">
-      <span class="project-num">04</span>
-      <div class="project-info">
-        <div class="project-title">Social Growth Experiment</div>
-        <div class="project-sub">A/B tested content formats, grew account from 2k → 48k followers in 6 months</div>
-      </div>
-      <span class="pill pill-data" style="font-size: 0.7rem;">Data + Creative</span>
-      <span class="project-arrow">↗</span>
-    </a>
-    <a href="#" class="project-row reveal" style="transition-delay: 0.26s;">
-      <span class="project-num">05</span>
-      <div class="project-info">
-        <div class="project-title">Product Launch Campaign</div>
-        <div class="project-sub">End-to-end campaign from concept to post-launch analysis</div>
-      </div>
-      <span class="pill pill-mkt" style="font-size: 0.7rem; background: #EAF3DE; color: #3B6D11;">Marketing</span>
-      <span class="project-arrow">↗</span>
-    </a>
-  </div>
-</section>
+<!-- ════ SITE ════ -->
+<div id="site">
+  <div class="mbar"><div class="mbar-c"></div><div class="mbar-a"></div></div>
 
-<!-- CERTIFICATIONS -->
-<section id="certifications">
-  <div class="section-label">Certifications</div>
-  <div class="certs-grid">
-    <div class="cert-card reveal">
-      <div class="cert-badge" style="background: var(--accent-data-light);">📈</div>
-      <div class="cert-info">
-        <div class="cert-name">Google Analytics Certified</div>
-        <div class="cert-issuer">Google</div>
-        <div class="cert-year">2024</div>
-      </div>
+  <nav>
+    <img src="carey_signature_logo.jpeg" alt="carey" class="nav-sig">
+    <div class="nav-r">
+      <ul class="nav-links">
+        <li><a href="#intro">About</a></li>
+        <li><a href="#trajectory">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="mode-pill" onclick="toggleMode()">— mode</button>
     </div>
-    <div class="cert-card reveal" style="transition-delay: 0.1s;">
-      <div class="cert-badge" style="background: var(--accent-creative-light);">🎯</div>
-      <div class="cert-info">
-        <div class="cert-name">Meta Blueprint Certification</div>
-        <div class="cert-issuer">Meta</div>
-        <div class="cert-year">2023</div>
-      </div>
-    </div>
-    <div class="cert-card reveal" style="transition-delay: 0.15s;">
-      <div class="cert-badge" style="background: #EAF3DE;">🔢</div>
-      <div class="cert-info">
-        <div class="cert-name">Data Analytics Professional</div>
-        <div class="cert-issuer">Google / Coursera</div>
-        <div class="cert-year">2023</div>
-      </div>
-    </div>
-    <div class="cert-card reveal" style="transition-delay: 0.2s;">
-      <div class="cert-badge" style="background: #FAEEDA;">🏅</div>
-      <div class="cert-info">
-        <div class="cert-name">HubSpot Marketing Certified</div>
-        <div class="cert-issuer">HubSpot Academy</div>
-        <div class="cert-year">2024</div>
-      </div>
-    </div>
-    <div class="cert-card reveal" style="transition-delay: 0.25s;">
-      <div class="cert-badge" style="background: var(--accent-data-light);">📊</div>
-      <div class="cert-info">
-        <div class="cert-name">Tableau Desktop Specialist</div>
-        <div class="cert-issuer">Salesforce / Tableau</div>
-        <div class="cert-year">2022</div>
-      </div>
-    </div>
-    <div class="cert-card reveal" style="transition-delay: 0.3s;">
-      <div class="cert-badge" style="background: var(--accent-creative-light);">✍️</div>
-      <div class="cert-info">
-        <div class="cert-name">Your Certification Here</div>
-        <div class="cert-issuer">Issuing Body</div>
-        <div class="cert-year">Year</div>
-      </div>
-    </div>
-  </div>
-</section>
+  </nav>
 
-<!-- TESTIMONIALS (WOM) -->
-<section id="wom">
-  <div class="section-label">Word of mouth</div>
-  <div class="wom-grid">
-    <div class="wom-card reveal">
-      <span class="wom-quote-mark">"</span>
-      <p class="wom-text">They're the rare kind of person who can present a data deck in the morning and a creative concept in the afternoon — and both are excellent.</p>
-      <div class="wom-author">
-        <div class="wom-name">Alex Johnson</div>
-        <div class="wom-role">Marketing Director, Studio Co.</div>
+  <!-- INTRO -->
+  <section id="intro">
+    <div class="w">
+      <div class="intro-grid">
+        <div class="rv">
+          <div class="intro-big">BOTH<br>HEMI<span class="hit">SPHERES</span><br>ACTIVE.</div>
+          <div class="intro-sub">Marketing &amp; Data Analytics professional bridging creative strategy and analytical precision.<br>Fashion-trained. Data-driven. Based in Madrid.</div>
+          <div class="intro-tags">
+            <span class="itag c">Creative Direction</span>
+            <span class="itag c">Fashion Marketing</span>
+            <span class="itag c">Visual Communication</span>
+            <span class="itag a">Data Analytics</span>
+            <span class="itag a">AI &amp; Data Science</span>
+            <span class="itag a">Performance Marketing</span>
+            <span class="itag">360° Profile</span>
+          </div>
+        </div>
+        <div class="rv" style="transition-delay:.13s">
+          <p class="intro-who">I studied fashion marketing at IED Florence — image, identity, the language of luxury. Then I got curious about the <em>why</em> behind all of it, so I did an AI &amp; Data Science Bootcamp at IE Business School in Madrid.</p>
+          <p class="intro-who">My thesis was selected as best at Future for Fashion International in Florence — it was about consumer data-sharing and what that does to marketing strategy. That tension between feeling and evidence is where I actually work best.</p>
+          <p class="intro-who">Madrid, Florence, Mexico City. EU and Mexican citizenship. Three languages. I'm not trying to be a generalist — I'm trying to be precise in more than one dimension at once.</p>
+          <div class="carey-aside">
+            <div class="carey-aside-lbl">On Carey</div>
+            <div class="carey-aside-txt">Carey is a personal brand — a creative entity that holds the parts of me that don't fit in a job title. Not an alter ego. More like a frequency. The work that comes from Carey is the work I'm most proud of.</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="wom-card reveal" style="transition-delay: 0.12s;">
-      <span class="wom-quote-mark">"</span>
-      <p class="wom-text">What stood out most was how they used the campaign data to directly inform the creative — not many people can move fluently between both worlds.</p>
-      <div class="wom-author">
-        <div class="wom-name">Sam Rivera</div>
-        <div class="wom-role">Head of Growth, Brand X</div>
-      </div>
-    </div>
-    <div class="wom-card reveal" style="transition-delay: 0.2s;">
-      <span class="wom-quote-mark">"</span>
-      <p class="wom-text">They delivered more clarity in two weeks than we'd had in six months. Highly strategic, fast to execute, and brilliant with ambiguous briefs.</p>
-      <div class="wom-author">
-        <div class="wom-name">Jordan Lee</div>
-        <div class="wom-role">Founder, The Agency</div>
-      </div>
-    </div>
-    <div class="wom-card reveal" style="transition-delay: 0.3s;">
-      <span class="wom-quote-mark">"</span>
-      <p class="wom-text">Add your own testimonial here — replace this with words from a client, collaborator, or manager who's seen you at your best.</p>
-      <div class="wom-author">
-        <div class="wom-name">Client Name</div>
-        <div class="wom-role">Their Role, Company</div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- INTERESTS -->
-<section id="interests">
-  <div class="section-label">Interests</div>
-  <div class="interests-row reveal">
-    <div class="interest-item">
-      <div class="interest-dot" style="background: var(--accent-data);"></div>
-      Data Visualisation
+  <!-- TRAJECTORY -->
+  <section id="trajectory">
+    <div class="w">
+      <div class="sh rv"><span class="sh-l">Trajectory</span><span class="sh-r">02</span></div>
+      <div class="traj-item rv">
+        <div class="traj-date">2025 — 2026<br>Madrid, Spain</div>
+        <div class="traj-main">
+          <div class="traj-role">Campaign Performance Forecasting</div>
+          <div class="traj-co">Woulah Spain — AI &amp; Data Science Graduation Project</div>
+          <div class="traj-desc">Analyzed digital marketing campaign data across impressions, clicks, reach and performance KPIs. Cleaned and transformed datasets using Python (Pandas). Identified audience behavior patterns and generated actionable insights to optimize campaign strategy.</div>
+        </div>
+        <div class="tbadge a">Analytical</div>
+      </div>
+      <div class="traj-item rv">
+        <div class="traj-date">Sep 2025<br>Madrid, Spain</div>
+        <div class="traj-main">
+          <div class="traj-role">Backstage &amp; Operations Assistant</div>
+          <div class="traj-co">Mercedes-Benz Fashion Week Madrid</div>
+          <div class="traj-desc">Operational precision in high-pressure fashion week environment. Cross-team coordination, attention to detail, fast adaptation behind the scenes.</div>
+        </div>
+        <div class="tbadge c">Creative</div>
+      </div>
+      <div class="traj-item rv">
+        <div class="traj-date">2024<br>Florence, Italy</div>
+        <div class="traj-main">
+          <div class="traj-role">Project Coordination &amp; Creative Direction</div>
+          <div class="traj-co">Independent Fashion &amp; Creative Projects — Freelance</div>
+          <div class="traj-desc">Visual content development and brand communication. Organized timelines and assets for marketing initiatives. Content creation aligned with brand identity across fashion and creative clients.</div>
+        </div>
+        <div class="tbadge b">Both</div>
+      </div>
+      <div class="traj-item rv">
+        <div class="traj-date">Dec 2023<br>Mexico City</div>
+        <div class="traj-main">
+          <div class="traj-role">Buying &amp; Market Analysis Assistant</div>
+          <div class="traj-co">Leader Shoes (Via Uno)</div>
+          <div class="traj-desc">Market trend analysis and competitor benchmarking. Product performance and sales data analysis. Structured reports for international strategy discussions.</div>
+        </div>
+        <div class="tbadge a">Analytical</div>
+      </div>
+      <div class="traj-item rv">
+        <div class="traj-date">2019<br>Mexico City</div>
+        <div class="traj-main">
+          <div class="traj-role">Production Assistant</div>
+          <div class="traj-co">Golf y Spa México Magazine</div>
+          <div class="traj-desc">Idea development, model selection guidance, shooting plan for selected locations, camera and light positioning, color selection, and general on-set assistance. Credited in print as Production Assistant.</div>
+        </div>
+        <div class="tbadge c">Creative</div>
+      </div>
     </div>
-    <div class="interest-item">
-      <div class="interest-dot" style="background: var(--accent-creative);"></div>
-      Photography
-    </div>
-    <div class="interest-item">
-      <div class="interest-dot" style="background: #3B6D11;"></div>
-      Behavioural Economics
-    </div>
-    <div class="interest-item">
-      <div class="interest-dot" style="background: #BA7517;"></div>
-      Typography
-    </div>
-    <div class="interest-item">
-      <div class="interest-dot" style="background: var(--accent-data);"></div>
-      Tech & AI
-    </div>
-    <div class="interest-item">
-      <div class="interest-dot" style="background: var(--accent-creative);"></div>
-      Travel
-    </div>
-    <div class="interest-item">
-      <div class="interest-dot" style="background: #A32D2D;"></div>
-      Podcasts
-    </div>
-    <div class="interest-item">
-      <div class="interest-dot" style="background: #3B6D11;"></div>
-      Sustainability
-    </div>
-    <div class="interest-item">
-      <div class="interest-dot" style="background: #534AB7;"></div>
-      Music
-    </div>
-    <div class="interest-item">
-      <div class="interest-dot" style="background: var(--accent-data);"></div>
-      Sport
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-label">Contact</div>
-  <div class="contact-split">
-    <div class="reveal">
-      <h2 class="contact-headline">Let's make something <em>great.</em></h2>
-      <p class="contact-body">Whether you have a brief, a half-formed idea, or just want to talk through a challenge — my inbox is always open. I work with brands, agencies, and startups.</p>
-      <div class="contact-links">
-        <a href="mailto:you@email.com" class="contact-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z" rx="2"/><path d="m4 8 8 6 8-6"/></svg>
-          Email
+  <!-- LANGUAGES + VALUES -->
+  <section id="languages">
+    <div class="w">
+      <div class="sh rv"><span class="sh-l">Languages &amp; Values</span><span class="sh-r">03</span></div>
+      <div class="two-col rv">
+        <div>
+          <div class="lang-item"><span class="lang-name">Spanish</span><span class="lang-lvl">Native</span></div>
+          <div class="lang-item"><span class="lang-name">English</span><span class="lang-lvl">C1 — IELTS Certified</span></div>
+          <div class="lang-item"><span class="lang-name">Italian</span><span class="lang-lvl">B2</span></div>
+        </div>
+        <div>
+          <div class="values-list">
+            <div class="val">Precision with purpose</div>
+            <div class="val">Curiosity as methodology</div>
+            <div class="val">Craft over convenience</div>
+            <div class="val">The emotional and the empirical</div>
+            <div class="val">Authenticity within structure</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IDENTITY -->
+  <section id="identity">
+    <div class="w">
+      <div class="sh rv"><span class="sh-l">Identity</span><span class="sh-r">04</span></div>
+      <div class="identity-grid rv">
+        <div class="id-card">
+          <div class="id-card-lbl">Background</div>
+          <div class="id-card-val">Fashion Marketing graduate, IED Florence. AI &amp; Data Science, IE Business School Madrid. International background across Spain, Italy, Mexico.</div>
+        </div>
+        <div class="id-card">
+          <div class="id-card-lbl">Approach</div>
+          <div class="id-card-val">I don't choose between intuition and analysis. I use both at the same time — the way a good editor knows both the image and the data behind it.</div>
+        </div>
+        <div class="id-card">
+          <div class="id-card-lbl">Currently</div>
+          <div class="id-card-val">Based in Madrid. Open to creative and analytical opportunities across luxury, culture, marketing and data. EU &amp; Mexico work permits.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="w">
+      <div class="sh rv"><span class="sh-l">Education</span><span class="sh-r">05</span></div>
+      <div class="edu-grid rv">
+        <div class="edu-card">
+          <div class="edu-yr">2025 — 2026</div>
+          <div class="edu-deg">AI &amp; Data Science Bootcamp</div>
+          <div class="edu-school">IE Business School</div>
+          <div class="edu-loc">Madrid, Spain</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-yr">2021 — 2024</div>
+          <div class="edu-deg">Bachelor in Fashion Marketing</div>
+          <div class="edu-school">IED University</div>
+          <div class="edu-loc">Florence, Italy</div>
+          <div class="edu-note">Selected best thesis — Future for Fashion International, Florence 2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="w">
+      <div class="sh rv"><span class="sh-l">Skills</span><span class="sh-r">06</span></div>
+      <div class="skills-wrap rv">
+        <div class="sk-col c">
+          <div class="sk-head">CREATIVE &amp; MARKETING</div>
+          <div class="sk-g"><div class="sk-g-lbl">Direction &amp; Strategy</div><div class="chips"><span class="chip">Brand Strategy</span><span class="chip">Art Direction</span><span class="chip">Creative Direction</span><span class="chip">Fashion Marketing</span><span class="chip">Content Creation</span></div></div>
+          <div class="sk-g"><div class="sk-g-lbl">Tools</div><div class="chips"><span class="chip">Adobe Photoshop</span><span class="chip">InDesign</span><span class="chip">Illustrator</span><span class="chip">Canva</span><span class="chip">PowerPoint</span></div></div>
+          <div class="sk-g"><div class="sk-g-lbl">Marketing</div><div class="chips"><span class="chip">Campaign Management</span><span class="chip">Social Media</span><span class="chip">Visual Communication</span><span class="chip">Consumer Behavior</span><span class="chip">Market Research</span></div></div>
+        </div>
+        <div class="sk-col a">
+          <div class="sk-head">ANALYTICAL &amp; DATA</div>
+          <div class="sk-g"><div class="sk-g-lbl">Data &amp; Analytics</div><div class="chips"><span class="chip">Python (Pandas)</span><span class="chip">SQL</span><span class="chip">Excel</span><span class="chip">Data Visualization</span><span class="chip">KPI Analysis</span></div></div>
+          <div class="sk-g"><div class="sk-g-lbl">Performance</div><div class="chips"><span class="chip">Campaign Forecasting</span><span class="chip">Performance Tracking</span><span class="chip">Audience Analysis</span><span class="chip">Data Cleaning</span></div></div>
+          <div class="sk-g"><div class="sk-g-lbl">Business</div><div class="chips"><span class="chip">Competitor Analysis</span><span class="chip">KPI Reporting</span><span class="chip">Decision Support</span><span class="chip">Consumer Insights</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="w">
+      <div class="sh rv"><span class="sh-l">Certifications</span><span class="sh-r">07</span></div>
+      <div class="cert-item c rv"><div><div class="cert-name">Inside LVMH Certificate</div><div class="cert-sub">Branding, Retail &amp; Customer Experience</div></div><div class="cert-iss">LVMH Online</div><div class="cert-yr">2025</div><div class="cert-dot"></div></div>
+      <div class="cert-item c rv"><div><div class="cert-name">Future for Fashion International</div><div class="cert-sub">Sala Bianca — Best thesis selection</div></div><div class="cert-iss">Florence</div><div class="cert-yr">2024</div><div class="cert-dot"></div></div>
+      <div class="cert-item c rv"><div><div class="cert-name">Photography</div><div class="cert-sub">Studio photography course</div></div><div class="cert-iss">Florence</div><div class="cert-yr">2023</div><div class="cert-dot"></div></div>
+      <div class="cert-item a rv"><div><div class="cert-name">Sociology of Communication</div><div class="cert-sub">Consumer Behavior &amp; Media</div></div><div class="cert-iss">IED Florence</div><div class="cert-yr">2024</div><div class="cert-dot"></div></div>
+      <div class="cert-item c rv"><div><div class="cert-name">Sustainability Seminar</div><div class="cert-sub">Marina Spadafora</div></div><div class="cert-iss">Florence</div><div class="cert-yr">2023</div><div class="cert-dot"></div></div>
+    </div>
+  </section>
+
+  <!-- DIG DEEPER -->
+  <section id="deeper">
+    <div class="w">
+      <div class="sh rv"><span class="sh-l">Dig Deeper</span><span class="sh-r">08</span></div>
+      <div class="dig-wrap rv">
+        <a class="dig-side dc" onclick="openDeep('creative')">
+          <div class="dig-lbl">Right Hemisphere (I)</div>
+          <div class="dig-title">CREATIVE<br>MIND</div>
+          <div class="dig-desc">Art direction · Fashion production · Photography · Writing · Brand communication · Editorial projects</div>
+          <div class="dig-arr">Explore creative work →</div>
         </a>
-        <a href="https://linkedin.com" target="_blank" class="contact-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
-        <a href="https://twitter.com" target="_blank" class="contact-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4l7 8m0 0 7 8M11 12 4 20m7-8L20 4"/></svg>
-          Twitter/X
+        <a class="dig-side da" onclick="openDeep('analytical')">
+          <div class="dig-lbl">Prefrontal Cortex (II)</div>
+          <div class="dig-title">ANALYTICAL<br>MIND</div>
+          <div class="dig-desc">Campaign forecasting · Python · SQL · KPI analysis · Data visualization · Market research</div>
+          <div class="dig-arr">Explore analytical work →</div>
         </a>
       </div>
     </div>
-    <div class="reveal" style="transition-delay: 0.15s;">
-      <div class="contact-form">
-        <div class="form-field">
-          <label class="form-label">Your name</label>
-          <input type="text" placeholder="Alex Smith">
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="w">
+      <div class="sh rv"><span class="sh-l">Contact</span><span class="sh-r">09</span></div>
+      <div class="contact-grid">
+        <div class="rv">
+          <div class="contact-big">LET'S<br>MAKE<br><span class="hit">SOMETHING.</span></div>
+          <div class="contact-info">
+            <a href="mailto:cvillamayoor@gmail.com">cvillamayoor@gmail.com</a><br>
+            <a href="tel:+34609967755">+34 609 967 755</a><br>
+            <a href="https://linkedin.com/in/carolina-villamayor-582083290" target="_blank">LinkedIn ↗</a><br>
+            <a href="https://carey-02.github.io" target="_blank">carey-02.github.io ↗</a>
+          </div>
+          <div class="contact-loc">Madrid, Spain<br><em>* EU &amp; Mexico work permits (dual citizenship)</em></div>
         </div>
-        <div class="form-field">
-          <label class="form-label">Email</label>
-          <input type="email" placeholder="alex@company.com">
+        <div class="rv" style="transition-delay:.15s">
+          <div class="cf">
+            <div class="fr"><label class="fl">Name</label><input type="text" placeholder="Your name"></div>
+            <div class="fr"><label class="fl">Email</label><input type="email" placeholder="your@email.com"></div>
+            <div class="fr"><label class="fl">What are you looking for?</label><input type="text" placeholder="Creative / Analytical / Both"></div>
+            <div class="fr"><label class="fl">Message</label><textarea rows="4" placeholder="Tell me about your project..."></textarea></div>
+            <button class="fsub">SEND →</button>
+          </div>
         </div>
-        <div class="form-field">
-          <label class="form-label">Message</label>
-          <textarea rows="5" placeholder="Tell me about your project..."></textarea>
-        </div>
-        <button class="form-submit">Send message →</button>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <span class="footer-copy">© 2026 Your Name. All rights reserved.</span>
-  <span class="footer-credit">Built with intention.</span>
-</footer>
+  <footer>
+    <div class="fl2">carey© — somewhere between concept and becoming</div>
+    <div class="fr2">Carolina Villamayor Acevedo<br>Madrid · Florence · Mexico City · © 2026</div>
+  </footer>
+</div>
+
+<!-- ════ CREATIVE DEEP DIVE ════ -->
+<div class="deep-page" id="creative-page">
+  <a class="back-btn" onclick="closeDeep()">← Back to portfolio</a>
+  <div class="cp-hero w">
+    <div class="cp-hero-big">RIGHT<br>HEMI<span class="hit">SPHERE</span></div>
+    <div class="cp-hero-meta">
+      Art Direction<br>Fashion Production<br>Brand Communication<br>Photography<br>Writing<br>Editorial Projects
+    </div>
+  </div>
+  <div class="cp-grid">
+    <div class="cp-cell oc1"><div class="cp-cell-bg">EDIT</div><div class="cp-cell-label">Mercedes-Benz FW · Madrid 2025</div></div>
+    <div class="cp-cell oc2"><div class="cp-cell-bg">PROD</div><div class="cp-cell-label">Golf y Spa Magazine · México 2019</div></div>
+    <div class="cp-cell oc3"><div class="cp-cell-bg">BRAND</div><div class="cp-cell-label">Creative Direction · Florence 2024</div></div>
+    <div class="cp-cell oc4"><div class="cp-cell-bg">THESIS</div><div class="cp-cell-label">Future for Fashion · Florence 2024</div></div>
+  </div>
+  <div class="w" style="padding-top:3rem;padding-bottom:5rem">
+    <div class="sh"><span class="sh-l">Creative Projects</span><span class="sh-r">—</span></div>
+    <a href="#" class="cp-proj-item">
+      <span class="pn">001</span>
+      <div class="pmain"><div class="ptitle">Mercedes-Benz Fashion Week</div><div class="psub">Backstage &amp; Operations · Madrid · Sep 2025 · Fashion week precision, editorial environment</div></div>
+      <span class="pbadge c">Creative</span><span class="parr">↗</span>
+    </a>
+    <a href="#" class="cp-proj-item">
+      <span class="pn">002</span>
+      <div class="pmain"><div class="ptitle">Golf y Spa México Magazine</div><div class="psub">Production Assistant · Mexico City · 2019 · Credited in print · Shoot planning, direction &amp; styling</div></div>
+      <span class="pbadge c">Creative</span><span class="parr">↗</span>
+    </a>
+    <a href="#" class="cp-proj-item">
+      <span class="pn">003</span>
+      <div class="pmain"><div class="ptitle">Creative Direction — Florence</div><div class="psub">Independent Projects · 2024 · Visual content, brand communication, campaign coordination</div></div>
+      <span class="pbadge c">Creative</span><span class="parr">↗</span>
+    </a>
+    <a href="#" class="cp-proj-item">
+      <span class="pn">004</span>
+      <div class="pmain"><div class="ptitle">Future for Fashion — Thesis</div><div class="psub">Best thesis selected · Florence 2024 · Consumer data &amp; marketing strategy · Presented to Matteo Ward</div></div>
+      <span class="pbadge b">Both</span><span class="parr">↗</span>
+    </a>
+    <a href="https://carey-02.github.io" target="_blank" class="cp-proj-item">
+      <span class="pn">005</span>
+      <div class="pmain"><div class="ptitle">This Portfolio — carey-02.github.io</div><div class="psub">Concept to deployment · HTML / CSS / JS · GitHub Pages · Designed from scratch</div></div>
+      <span class="pbadge b">Both</span><span class="parr">↗</span>
+    </a>
+  </div>
+</div>
+
+<!-- ════ ANALYTICAL DEEP DIVE ════ -->
+<div class="deep-page" id="analytical-page">
+  <a class="back-btn" onclick="closeDeep()">← Back to portfolio</a>
+  <div class="ap-hero w">
+    <div class="ap-hero-big">PREFRONTAL<br><span class="hit">CORTEX</span></div>
+    <div class="ap-hero-desc">Data analysis, campaign forecasting, and pattern recognition. Where the numbers stop being numbers and start being decisions.</div>
+  </div>
+
+  <div class="ap-blob-section w">
+    <div class="ap-blob"></div>
+    <div class="ap-blob-text">Multidisciplinary marketing professional with strong analytical training in AI and Data Science. Skilled in translating data into structured insights to support strategic decision-making and performance optimization.</div>
+  </div>
+
+  <div class="w" style="padding-top:2rem">
+    <div class="sh"><span class="sh-l">Tools &amp; Methods</span><span class="sh-r">—</span></div>
+    <div class="ap-list-header">
+      <span>Tool</span><span>Category</span><span>Application</span><span>Level</span><span>Project</span>
+    </div>
+    <div class="ap-list-row"><span class="bold">Python (Pandas)</span><span>Data Processing</span><span>Data cleaning, transformation</span><span>Intermediate</span><span>Woulah · Forecasting</span></div>
+    <div class="ap-list-row"><span class="bold">SQL</span><span>Database</span><span>Querying, data extraction</span><span>Intermediate</span><span>IE Bootcamp</span></div>
+    <div class="ap-list-row"><span class="bold">Excel</span><span>Analysis</span><span>KPI reporting, dashboards</span><span>Advanced</span><span>All projects</span></div>
+    <div class="ap-list-row"><span class="bold">Data Visualization</span><span>Communication</span><span>Charts, dashboards, reports</span><span>Intermediate</span><span>Woulah · IE</span></div>
+    <div class="ap-list-row"><span class="bold">KPI Analysis</span><span>Performance</span><span>Impressions, CTR, reach</span><span>Applied</span><span>Woulah Spain</span></div>
+    <div class="ap-list-row"><span class="bold">Market Research</span><span>Business</span><span>Competitor analysis, benchmarking</span><span>Applied</span><span>Via Uno · Thesis</span></div>
+  </div>
+
+  <div class="w" style="padding-top:3rem;padding-bottom:5rem">
+    <div class="sh"><span class="sh-l">Analytical Projects</span><span class="sh-r">—</span></div>
+    <a href="#" class="ap-proj-item">
+      <span class="pn">001</span>
+      <div class="pmain"><div class="ptitle">Campaign Performance Forecasting</div><div class="psub">Woulah Spain · 2025–2026 · Python · KPI analysis · Campaign optimization · Graduation project, IE Business School</div></div>
+      <span class="pbadge a" style="border-color:var(--periwinkle);color:var(--periwinkle)">Analytical</span><span class="parr">↗</span>
+    </a>
+    <a href="#" class="ap-proj-item">
+      <span class="pn">002</span>
+      <div class="pmain"><div class="ptitle">Buying &amp; Market Analysis</div><div class="psub">Via Uno · Mexico City · 2023 · Sales data, trend analysis, competitor benchmarking, strategic reporting</div></div>
+      <span class="pbadge a" style="border-color:var(--periwinkle);color:var(--periwinkle)">Analytical</span><span class="parr">↗</span>
+    </a>
+    <a href="#" class="ap-proj-item">
+      <span class="pn">003</span>
+      <div class="pmain"><div class="ptitle">Future for Fashion — Thesis (Technical)</div><div class="psub">Consumer data-sharing &amp; marketing strategy · Data-driven insights · Selected best thesis · Florence 2024</div></div>
+      <span class="pbadge b">Both</span><span class="parr">↗</span>
+    </a>
+    <a href="https://carey-02.github.io" target="_blank" class="ap-proj-item">
+      <span class="pn">004</span>
+      <div class="pmain"><div class="ptitle">This Portfolio — carey-02.github.io</div><div class="psub">Built from scratch · HTML / CSS / JS · GitHub Pages · Technical execution of a creative concept</div></div>
+      <span class="pbadge b">Both</span><span class="parr">↗</span>
+    </a>
+  </div>
+</div>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
+// ── Clock ──
+function clock(){
+  const now=new Date();
+  const h=String(now.getHours()).padStart(2,'0');
+  const m=String(now.getMinutes()).padStart(2,'0');
+  const s=String(now.getSeconds()).padStart(2,'0');
+  const el=document.getElementById('liveclock');
+  if(el) el.textContent=h+':'+m+':'+s;
+}
+clock(); setInterval(clock,1000);
 
+// ── Landing click → split ──
+document.getElementById('landing').addEventListener('click',()=>{
+  document.getElementById('landing').classList.add('out');
+  setTimeout(()=>{ document.getElementById('split').classList.remove('out'); },500);
+});
+
+// ── Choose side → sig transition → site ──
+let currentMode='creative';
+function chooseSide(mode){
+  currentMode=mode;
+  // show sig transition
+  const st=document.getElementById('sig-transition');
+  st.classList.add('show');
+  document.body.classList.add(mode==='creative'?'mc':'ma');
+  setTimeout(()=>{
+    document.getElementById('split').classList.add('out');
+    document.getElementById('site').classList.add('active');
+    document.getElementById('site').style.display='block';
+    document.body.classList.add('scrollable');
+    // fade out sig
+    setTimeout(()=>{
+      st.style.transition='opacity .6s';
+      st.style.opacity='0';
+      setTimeout(()=>{ st.classList.remove('show'); st.style.opacity=''; st.style.transition=''; },650);
+    },900);
+    updatePill();
+    // trigger reveals
+    setTimeout(()=>{
+      document.querySelectorAll('.rv').forEach((el,i)=>{
+        setTimeout(()=>el.classList.add('in'),i*40);
+      });
+    },400);
+  },1200);
+}
+
+function toggleMode(){
+  currentMode=currentMode==='creative'?'analytical':'creative';
+  document.body.classList.remove('mc','ma');
+  document.body.classList.add(currentMode==='creative'?'mc':'ma');
+  updatePill();
+}
+function updatePill(){
+  const p=document.querySelector('.mode-pill');
+  if(p) p.textContent=currentMode==='creative'?'Creative':'Analytical';
+}
+
+// ── Deep dives ──
+function openDeep(type){
+  document.getElementById('creative-page').classList.remove('show');
+  document.getElementById('analytical-page').classList.remove('show');
+  document.getElementById(type+'-page').classList.add('show');
+  window.scrollTo(0,0);
+}
+function closeDeep(){
+  document.getElementById('creative-page').classList.remove('show');
+  document.getElementById('analytical-page').classList.remove('show');
+  document.getElementById('deeper').scrollIntoView({behavior:'smooth'});
+}
+
+// ── Scroll reveal ──
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.06});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
 </body>
 </html>
