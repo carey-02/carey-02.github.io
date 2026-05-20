@@ -74,22 +74,146 @@ body.scrollable{overflow:auto}
   background:#FFFFFF;
 }
 
-/* CAREY — massive, centered, bleeds off both sides like OLMA */
+/* LOGO IMAGE — mix-blend-mode:multiply makes white transparent on white bg */
+.land-carey-wrap{
+  position:relative;z-index:3;
+  display:flex;align-items:center;justify-content:center;
+  width:100%;
+}
 .land-carey{
-  position:relative;z-index:1;
-  font-family:'Arial Black','Arial Bold',Arial,sans-serif;
-  font-weight:900;
-  font-size:clamp(12rem,38vw,38rem);
-  letter-spacing:-0.01em;
-  line-height:1;
-  color:#0C0A08;
+  width:min(88vw,1100px);
+  mix-blend-mode:multiply;
   animation:logofade 1.2s ease forwards;
   user-select:none;
-  white-space:nowrap;
-  /* center it so edges bleed off screen */
-  margin:0 auto;
+  display:block;
 }
 @keyframes logofade{from{opacity:0}to{opacity:1}}
+
+/* ── BLOB SYSTEM ──
+   z-index:2 — behind logo, in front of white bg
+   Sharp solid core, very subtle smooth edge fade (like OLMA animals)
+   clip-path gives each an irregular organic silhouette
+*/
+.blob-wrap{
+  position:absolute;
+  pointer-events:none;
+  z-index:2;
+  bottom:0;
+}
+
+/* ── LEFT: Brown + yellow spots ── */
+.blob-wrap.bw1{
+  left:-3%;
+  width:30vw;
+  height:90vh;
+  clip-path:polygon(8% 100%, 0% 62%, 4% 38%, 12% 18%, 26% 6%, 44% 10%, 60% 4%, 70% 16%, 74% 34%, 66% 54%, 72% 74%, 62% 90%, 48% 100%);
+}
+.blob-wrap.bw1 .bcore{
+  position:absolute;
+  inset:-20%;
+  background:
+    /* yellow spots — sharp little orbs */
+    radial-gradient(ellipse 5% 3% at 38% 72%, rgba(255,215,0,1) 0%, rgba(255,215,0,0.95) 30%, rgba(235,185,0,0.4) 65%, transparent 85%),
+    radial-gradient(ellipse 4% 3% at 58% 80%, rgba(248,208,0,1) 0%, rgba(248,208,0,0.9) 28%, transparent 70%),
+    radial-gradient(ellipse 3% 2% at 24% 66%, rgba(255,220,5,0.98) 0%, rgba(240,195,0,0.85) 30%, transparent 72%),
+    radial-gradient(ellipse 4% 2% at 64% 60%, rgba(242,198,0,0.95) 0%, transparent 68%),
+    radial-gradient(ellipse 3% 2% at 42% 56%, rgba(252,212,0,0.9) 0%, transparent 65%),
+    radial-gradient(ellipse 3% 2% at 30% 48%, rgba(238,188,0,0.85) 0%, transparent 65%),
+    radial-gradient(ellipse 4% 2% at 55% 50%, rgba(245,202,0,0.82) 0%, transparent 65%),
+    /* brown body: solid dense core, edges fade over ~15% */
+    radial-gradient(ellipse 70% 88% at 48% 90%,
+      rgba(88,48,12,1) 0%,
+      rgba(88,48,12,1) 35%,
+      rgba(110,65,20,0.96) 52%,
+      rgba(145,92,35,0.75) 68%,
+      rgba(185,130,60,0.35) 82%,
+      transparent 92%);
+  filter:blur(14px);
+}
+
+/* ── CENTRE: Hot magenta + blue on sides ── */
+.blob-wrap.bw2{
+  left:50%;
+  transform:translateX(-50%);
+  width:28vw;
+  height:98vh;
+  clip-path:polygon(14% 100%, 4% 72%, 0% 46%, 7% 24%, 18% 8%, 34% 2%, 50% 6%, 66% 0%, 80% 10%, 90% 26%, 96% 48%, 92% 68%, 84% 86%, 72% 100%);
+}
+.blob-wrap.bw2 .bcore{
+  position:absolute;
+  inset:-20%;
+  background:
+    /* baby blue — left edge strips */
+    radial-gradient(ellipse 14% 55% at 6% 52%, rgba(75,148,255,0.95) 0%, rgba(75,148,255,0.9) 25%, rgba(60,128,240,0.5) 60%, transparent 80%),
+    radial-gradient(ellipse 10% 35% at 10% 72%, rgba(88,160,255,0.9) 0%, rgba(88,160,255,0.8) 25%, transparent 70%),
+    /* baby blue — right edge strips */
+    radial-gradient(ellipse 14% 55% at 94% 50%, rgba(75,148,255,0.95) 0%, rgba(75,148,255,0.9) 25%, rgba(60,128,240,0.5) 60%, transparent 80%),
+    radial-gradient(ellipse 10% 35% at 90% 70%, rgba(88,160,255,0.9) 0%, rgba(88,160,255,0.8) 25%, transparent 70%),
+    /* scattered blue spots mid */
+    radial-gradient(ellipse 4% 3% at 28% 52%, rgba(95,165,255,0.88) 0%, transparent 70%),
+    radial-gradient(ellipse 3% 2% at 70% 46%, rgba(82,155,252,0.85) 0%, transparent 65%),
+    radial-gradient(ellipse 4% 2% at 32% 40%, rgba(90,160,255,0.8) 0%, transparent 65%),
+    /* magenta core — solid then fades */
+    radial-gradient(ellipse 58% 94% at 50% 94%,
+      rgba(255,0,92,1) 0%,
+      rgba(255,0,92,1) 28%,
+      rgba(255,35,125,0.92) 44%,
+      rgba(255,90,160,0.65) 60%,
+      rgba(255,155,198,0.3) 75%,
+      transparent 88%);
+  filter:blur(12px);
+}
+
+/* ── RIGHT: Baby pink + green spots centre ── */
+.blob-wrap.bw3{
+  right:-3%;
+  width:29vw;
+  height:86vh;
+  clip-path:polygon(28% 100%, 6% 80%, 0% 56%, 4% 36%, 16% 18%, 34% 8%, 52% 12%, 70% 5%, 84% 16%, 94% 34%, 100% 54%, 96% 74%, 88% 90%, 68% 100%);
+}
+.blob-wrap.bw3 .bcore{
+  position:absolute;
+  inset:-20%;
+  background:
+    /* green spots — sharp, clustered in centre of mass */
+    radial-gradient(ellipse 6% 4% at 44% 52%, rgba(48,95,6,1) 0%, rgba(48,95,6,0.95) 28%, rgba(40,78,5,0.45) 60%, transparent 82%),
+    radial-gradient(ellipse 5% 3% at 56% 62%, rgba(52,102,8,0.98) 0%, rgba(52,102,8,0.9) 28%, transparent 72%),
+    radial-gradient(ellipse 4% 3% at 38% 64%, rgba(45,88,6,0.95) 0%, rgba(45,88,6,0.85) 28%, transparent 70%),
+    radial-gradient(ellipse 5% 3% at 60% 48%, rgba(50,98,7,0.92) 0%, transparent 68%),
+    radial-gradient(ellipse 4% 2% at 42% 44%, rgba(46,90,6,0.88) 0%, transparent 65%),
+    radial-gradient(ellipse 3% 2% at 52% 42%, rgba(44,86,5,0.85) 0%, transparent 65%),
+    radial-gradient(ellipse 4% 3% at 35% 55%, rgba(48,94,7,0.82) 0%, transparent 65%),
+    radial-gradient(ellipse 3% 2% at 62% 58%, rgba(50,98,7,0.78) 0%, transparent 62%),
+    /* baby pink body — solid core, gentle fade */
+    radial-gradient(ellipse 72% 90% at 50% 90%,
+      rgba(245,132,158,1) 0%,
+      rgba(245,132,158,1) 30%,
+      rgba(250,162,180,0.88) 48%,
+      rgba(252,192,205,0.6) 64%,
+      rgba(255,218,226,0.28) 78%,
+      transparent 90%);
+  filter:blur(16px);
+}
+
+.land-click{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  z-index:5;
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight:400;font-size:.62rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(0,0,0,0.35);
+  animation:pulse 2.5s ease-in-out infinite;
+  pointer-events:none;white-space:nowrap;
+}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.7}}
+
+.land-name{
+  position:absolute;bottom:.8rem;right:1.5rem;z-index:5;
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight:400;font-size:.52rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(0,0,0,0.2);
+}
 
 /* ── BLOB SYSTEM ──
    Thin, irregular, rising from bottom, in front of CAREY (z-index:2)
@@ -733,7 +857,9 @@ footer{border-top:1px solid var(--bd);padding:1.5rem 2rem;display:flex;justify-c
     <div class="blob-wrap bw1"><div class="bcore"></div></div>
     <div class="blob-wrap bw2"><div class="bcore"></div></div>
     <div class="blob-wrap bw3"><div class="bcore"></div></div>
-    <div class="land-carey">CAREY</div>
+    <div class="land-carey-wrap">
+      <img src="careyOFFICIAL_logo.png" alt="Carey" class="land-carey">
+    </div>
     <div class="land-click">Click anywhere to explore</div>
   </div>
 
